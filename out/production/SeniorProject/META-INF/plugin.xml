@@ -30,7 +30,8 @@
   <actions>
     <!-- Add your actions here -->
     <action id="GenerateErgoButton" class="com.ANZR.Ergo.GenerateButton" text="Ergo"
-            description="Run Ergo to find any anti-patterns">
+            description="Run Ergo to find any anti-patterns"
+            icon="ErgoIconLoader.ERGO_PLAY_BUTTON">
       <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
     </action>
   </actions>

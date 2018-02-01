@@ -9,7 +9,6 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import org.jetbrains.jps.builders.BuildOutputConsumer;
-
 import java.io.File;
 
 public class GenerateButton extends AnAction{
