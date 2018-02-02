@@ -4,9 +4,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class ClassFolder {
-    String name;
-    ArrayList<AntiPattern> antiPatterns;
-    DefaultTableModel model;
+    private String name;
+    private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
+    private DefaultTableModel model;
 
     public ClassFolder(String name, DefaultTableModel model) {
         this.name = name;

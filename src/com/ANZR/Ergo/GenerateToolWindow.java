@@ -1,5 +1,6 @@
 package com.ANZR.Ergo;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.*;
 import com.intellij.ui.content.*;
 import com.intellij.ui.table.JBTable;
@@ -11,13 +12,15 @@ public class GenerateToolWindow implements ToolWindowFactory {
 
     private JLabel projectName = new JLabel();
     private JLabel projectURL = new JLabel();
-    private JPanel contentWindow = new JPanel();
+    private JPanel contentWindow = new JPanel(new BorderLayout());
     private JBTable table;
-    private DefaultTableModel tableModel;
     private ToolWindow toolWindow;
+    private DefaultTableModel tableModel;
     private Project project;
+    private JButton button = new JButton();
+    String[][] tableHeader = {{"Element", "Number of AP", "Num of C"}, {"AP Name", "Y/N"}};
 
-    Object[][] data = {{0, "File","Anti-Pattern(s)"},
+    Object[][] dummyData = {{0, "File","Anti-Pattern(s)"},
             {1, "File","Anti-Pattern(s)"},
             {2, "File","Anti-Pattern(s)"}};
 
@@ -26,7 +29,14 @@ public class GenerateToolWindow implements ToolWindowFactory {
         this.toolWindow = toolWindow;
         this.project = project;
 
+//        button.setIcon(IconLoader.getIcon("/icons/button_image.png"));
+//        button.setPreferredSize(new Dimension(20, 20));
+//        contentWindow.add(button, BorderLayout.BEFORE_LINE_BEGINS);
+
         setupTable();
+
+
+
 
         projectName.setText(this.project.getName());
         projectURL.setText(this.project.getBasePath());
@@ -37,28 +47,44 @@ public class GenerateToolWindow implements ToolWindowFactory {
         toolWindow.show(null);
     }
 
-    String[][] tableHeader = {{"Element", "Number of AP", "Num of C"}, {"C Name", "# AP"}, {"AP Name", "Y/N"}};
+
 
     private void setupTable() {
-        tableModel = new DefaultTableModel(data, tableHeader[0]);
-
         table = createTable();
+        tableModel = new DefaultTableModel(dummyData, tableHeader[0]);
         table.setModel(tableModel);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
 
+
         contentWindow.add(new JScrollPane(table));
         contentWindow.add(table.getTableHeader(), BorderLayout.NORTH);
-        contentWindow.add(table, BorderLayout.CENTER);
 
     }
+
+    private void setupNextTable(boolean isClass){
+        if(isClass){
+
+            Object[][] patterns = {{"God Object", 1}, {"Long Method", 2}, {"Singleton Overuse", 3}};
+            tableModel = new DefaultTableModel(patterns, tableHeader[1]);
+            table.setModel(tableModel);
+
+        }else{
+            tableModel = new DefaultTableModel(dummyData, tableHeader[0]);
+            table.setModel(tableModel);
+
+        }
+
+
+    }
+
 
     private JBTable createTable(){
         return new JBTable(){
             public boolean isCellEditable(int rows, int columns){
                 if(table.isCellSelected(rows,columns) && table.isRowSelected(rows)){
-                    tableModel.addRow(data[0]);
+                    setupNextTable(true);
                 }
                 return false;
             }
