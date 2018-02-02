@@ -13,7 +13,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private JLabel projectURL = new JLabel();
     private JPanel contentWindow = new JPanel();
 
-    JBTable jt;
+    JBTable table;
     DefaultTableModel model;
 
     Object[][] data = {{".0.","File","Anti-Pattern(s)"},
@@ -31,17 +31,14 @@ public class GenerateToolWindow implements ToolWindowFactory {
         Runner();
 
         projectName.setText(src.getName());
-        projectURL.setText(src.getPresentableUrl());
+        projectURL.setText(src.getBasePath());
 //        contentWindow.add(projectName);
 //        contentWindow.add(projectURL);
+
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentWindow, "", false);
         toolWindow.getContentManager().addContent(content);
         toolWindow.show(null);
-//        content = contentFactory.createContent(projectURL, "", false);
-//        toolWindow.getContentManager().addContent(content);
-
-
     }
 
     public void Runner() {
@@ -53,21 +50,21 @@ public class GenerateToolWindow implements ToolWindowFactory {
         model.addRow(data[1]);
         model.addRow(data[2]);
 
-        jt = new JBTable(){
+        table = new JBTable(){
             public boolean isCellEditable(int rows, int columns){
-                if(jt.isCellSelected(rows,columns) && jt.isRowSelected(rows)){
+                if(table.isCellSelected(rows,columns) && table.isRowSelected(rows)){
 //                    model.removeRow(rows);
                     model.addRow(data[0]);
                 }
                 return false;
           }
         };
-        jt.setModel(model);
+        table.setModel(model);
 
-        jt.setPreferredScrollableViewportSize(new Dimension());
-        jt.setFillsViewportHeight(true);
+        table.setPreferredScrollableViewportSize(new Dimension());
+        table.setFillsViewportHeight(true);
 
-//        JScrollPane jsp = new JScrollPane(jt);
-        contentWindow.add(jt);
+//        JScrollPane jsp = new JScrollPane(table);
+        contentWindow.add(table);
     }
 }
