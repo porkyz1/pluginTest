@@ -12,28 +12,24 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private JLabel projectName = new JLabel();
     private JLabel projectURL = new JLabel();
     private JPanel contentWindow = new JPanel();
+    private JBTable table;
+    private DefaultTableModel tableModel;
+    private ToolWindow toolWindow;
+    private Project project;
 
-    JBTable table;
-    DefaultTableModel model;
+    Object[][] data = {{0, "File","Anti-Pattern(s)"},
+            {1, "File","Anti-Pattern(s)"},
+            {2, "File","Anti-Pattern(s)"}};
 
-    Object[][] data = {{".0.","File","Anti-Pattern(s)"},
-            {".1.","File","Anti-Pattern(s)"},
-            {".2.","File","Anti-Pattern(s)"}};
 
-    private ToolWindow myToolWindow;
-    private Project src;
-
-    // Create the tool window content.
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
-        myToolWindow = toolWindow;
-        src = project;
+        this.toolWindow = toolWindow;
+        this.project = project;
 
-        Runner();
+        setupTable();
 
-        projectName.setText(src.getName());
-        projectURL.setText(src.getBasePath());
-//        contentWindow.add(projectName);
-//        contentWindow.add(projectURL);
+        projectName.setText(this.project.getName());
+        projectURL.setText(this.project.getBasePath());
 
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentWindow, "", false);
@@ -41,30 +37,35 @@ public class GenerateToolWindow implements ToolWindowFactory {
         toolWindow.show(null);
     }
 
-    public void Runner() {
-        model = new DefaultTableModel();
-        model.addColumn("IconCol");
-        model.addColumn("FileCol");
-        model.addColumn("#/%Col");
-//        model.addColumn("DescCol");
-        model.addRow(data[1]);
-        model.addRow(data[2]);
+    String[][] tableHeader = {{"Element", "Number of AP", "Num of C"}, {"C Name", "# AP"}, {"AP Name", "Y/N"}};
 
-        table = new JBTable(){
+    private void setupTable() {
+        tableModel = new DefaultTableModel(data, tableHeader[0]);
+
+        table = createTable();
+        table.setModel(tableModel);
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        table.setFillsViewportHeight(true);
+        table.setAutoCreateRowSorter(true);
+
+        contentWindow.add(new JScrollPane(table));
+        contentWindow.add(table.getTableHeader(), BorderLayout.NORTH);
+        contentWindow.add(table, BorderLayout.CENTER);
+
+    }
+
+    private JBTable createTable(){
+        return new JBTable(){
             public boolean isCellEditable(int rows, int columns){
                 if(table.isCellSelected(rows,columns) && table.isRowSelected(rows)){
-//                    model.removeRow(rows);
-                    model.addRow(data[0]);
+                    tableModel.addRow(data[0]);
                 }
                 return false;
-          }
+            }
         };
-        table.setModel(model);
+    }
 
-        table.setPreferredScrollableViewportSize(new Dimension());
-        table.setFillsViewportHeight(true);
-
-//        JScrollPane jsp = new JScrollPane(table);
-        contentWindow.add(table);
+    private void addToTable(Object[] data){
+        tableModel.addRow(data);
     }
 }
