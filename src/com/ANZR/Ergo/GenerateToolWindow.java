@@ -13,6 +13,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private JLabel projectURL = new JLabel();
     private JPanel contentWindow = new JPanel(new BorderLayout());
     private JBTable table = new JBTable();
+    private JLabel errorLabel = new JLabel();
 
     int row;
     int column;
@@ -28,25 +29,32 @@ public class GenerateToolWindow implements ToolWindowFactory {
     String[][] tableHeader34 = {{"Element", "Number of AP"}, {"AP Name", "Y/N"}};
     String[][] dummyData = {{"greg", "3"}, {"god", "maybe"}, {"jeff", "sure"}};
 
-    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder) {
+    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder, boolean built) {
         this.toolWindow = toolWindow;
         this.project = project;
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
+
+        if(false) {
+
 //        button.setIcon(IconLoader.getIcon("/icons/button_image.png"));
 //        button.setSize(20,20);
 //        button.setDefaultCapable(false);
 //        button.setAction();
 //        contentWindow.add(button);
 
-        if(tableModel == null)
-            tableModel = (currentFolder.getModel());
-        setupTable();
+
+            if (tableModel == null)
+                tableModel = (currentFolder.getModel());
+            setupTable();
 
 
+            projectName.setText(this.project.getName());
+            projectURL.setText(this.project.getBasePath());
 
-        projectName.setText(this.project.getName());
-        projectURL.setText(this.project.getBasePath());
+
+        }else
+            showErrorLabel("fuck");
 
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(contentWindow, "", false);
@@ -58,7 +66,14 @@ public class GenerateToolWindow implements ToolWindowFactory {
 //        toolWindow.show(null);
     }
 
+    public void showErrorLabel(String error){
 
+        errorLabel.setText(error);
+        errorLabel.setVisible(true);
+
+        contentWindow.add(errorLabel, BorderLayout.CENTER);
+
+    }
 
     private void setupTable() {
         table = createTable();
