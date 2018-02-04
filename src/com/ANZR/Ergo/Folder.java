@@ -2,16 +2,30 @@ package com.ANZR.Ergo;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Folder {
     String name;
-    ArrayList<Folder> folders;
-    ArrayList<ClassFolder> classes;
-    DefaultTableModel model;
+    ArrayList<Folder> folders = new ArrayList<>();
+    ArrayList<ClassFolder> classes= new ArrayList<>();
+    DefaultTableModel model = new DefaultTableModel();
+    String[] tableHeader = {"Element", "Number of AP"};
 
-    public Folder(String name, DefaultTableModel model) {
+    public Folder() {
+    }
+
+    public Folder(String name, Folder folder) {
         this.name = name;
-        this.model = model;
+        this.folders = folder.getFolders();
+        this.classes = folder.getClasses();
+        if(folder.getModel() != null)
+            this.model = folder.getModel();
+    }
+    public void addClass(ClassFolder classe){
+        this.classes.add(classe);
+    }
+    public void addFolder(Folder folder){
+        this.folders.add(folder);
     }
 
     public String getName() {
@@ -27,27 +41,24 @@ public class Folder {
     }
 
     public DefaultTableModel getModel() {
-        return model;
+        return makeModel();
     }
 
-    public void makeModel(){
-        ArrayList<Object> temp = new ArrayList<>();
-        model.addColumn("File Name");
-        model.addColumn("Percent/Number of Anti-Patterns");
-        for (int x = 0; x <= folders.toArray().length; x++) {
-            temp.clear();
-            temp.add(folders.get(x).getName());
-
-            temp.add(folders.get(x).folders.toArray().length+
-                    folders.get(x).classes.toArray().length);
-            model.addRow(temp.toArray());
+    private DefaultTableModel makeModel(){
+        Object[][] temp = new Object[folders.toArray().length+
+                classes.toArray().length][tableHeader.length];
+        for (int x = 0; x < folders.toArray().length; x++) {
+            if(folders.get(x).getName() != null)
+                temp[x][0] = folders.get(x).getName();
+            else temp[x][0] = "null";
+                temp[x][1] = folders.toArray().length;
         }
-        for (int x = 0; x <= folders.toArray().length; x++) {
-            temp.clear();
-            temp.add(folders.get(x).getName());
-
-            temp.add(folders.get(x).classes.toArray().length);
-            model.addRow(temp.toArray());
+        for (int x = 0; x < classes.toArray().length; x++) {
+            if(classes.get(x).getName() != null)
+                temp[x+folders.toArray().length][0] = classes.get(x).getName();
+            else temp[x+folders.toArray().length][0] = "null";
+                temp[x+folders.toArray().length][1] = classes.toArray().length;
         }
+        return (new DefaultTableModel(temp, tableHeader));
     }
 }

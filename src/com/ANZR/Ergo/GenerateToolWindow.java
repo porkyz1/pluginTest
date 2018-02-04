@@ -1,6 +1,5 @@
 package com.ANZR.Ergo;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.*;
 import com.intellij.ui.content.*;
 import com.intellij.ui.table.JBTable;
@@ -13,28 +12,36 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private JLabel projectName = new JLabel();
     private JLabel projectURL = new JLabel();
     private JPanel contentWindow = new JPanel(new BorderLayout());
-    private JBTable table;
+    private JBTable table = new JBTable();
+
+    int row;
+    int column;
+
+    private Folder rootFolder;
+    private Folder currentFolder;
+    private ClassFolder currentClass;
+
     private ToolWindow toolWindow;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel = null;
     private Project project;
     private JButton button = new JButton();
-    String[][] tableHeader = {{"Element", "Number of AP", "Num of C"}, {"AP Name", "Y/N"}};
+    String[][] tableHeader34 = {{"Element", "Number of AP"}, {"AP Name", "Y/N"}};
+    String[][] dummyData = {{"greg", "3"}, {"god", "maybe"}, {"jeff", "sure"}};
 
-    Object[][] dummyData = {{0, "File","Anti-Pattern(s)"},
-            {1, "File","Anti-Pattern(s)"},
-            {2, "File","Anti-Pattern(s)"}};
-
-
-    public void createToolWindowContent(Project project, ToolWindow toolWindow) {
+    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder) {
         this.toolWindow = toolWindow;
         this.project = project;
-
+        this.rootFolder = rootFolder;
+        this.currentFolder = rootFolder;
 //        button.setIcon(IconLoader.getIcon("/icons/button_image.png"));
-//        button.setPreferredSize(new Dimension(20, 20));
-//        contentWindow.add(button, BorderLayout.BEFORE_LINE_BEGINS);
+//        button.setSize(20,20);
+//        button.setDefaultCapable(false);
+//        button.setAction();
+//        contentWindow.add(button);
 
+        if(tableModel == null)
+            tableModel = (currentFolder.getModel());
         setupTable();
-
 
 
 
@@ -47,11 +54,15 @@ public class GenerateToolWindow implements ToolWindowFactory {
         toolWindow.show(null);
     }
 
+    public void createToolWindowContent(Project project, ToolWindow toolWindow) {
+//        toolWindow.show(null);
+    }
+
 
 
     private void setupTable() {
         table = createTable();
-        tableModel = new DefaultTableModel(dummyData, tableHeader[0]);
+        createModel();
         table.setModel(tableModel);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setFillsViewportHeight(true);
@@ -63,32 +74,44 @@ public class GenerateToolWindow implements ToolWindowFactory {
 
     }
 
-    private void setupNextTable(boolean isClass){
-        if(isClass){
+    private void setupNextTable(DefaultTableModel nextTableModel){
+        if(nextTableModel != null) {
 
-            Object[][] patterns = {{"God Object", 1}, {"Long Method", 2}, {"Singleton Overuse", 3}};
-            tableModel = new DefaultTableModel(patterns, tableHeader[1]);
-            table.setModel(tableModel);
-
-        }else{
-            tableModel = new DefaultTableModel(dummyData, tableHeader[0]);
-            table.setModel(tableModel);
-
+//            Object[][] patterns = {{"God Object", 1}, {"Long Method", 2}, {"Singleton Overuse", 3}};
+//            tableModel = new DefaultTableModel(patterns, tableHeader[1]);
+            table.setModel(nextTableModel);
         }
+//        }else{
+//            tableModel = new DefaultTableModel(dummyData, tableHeader[0]);
+//            table.setModel(tableModel);
+//
+//        }
 
 
     }
 
-
+private void createModel(){
+    if(table.isCellSelected(row,column) && table.isRowSelected(row)){
+        if(tableModel.getValueAt(row,0).toString().contains(".java"))
+            tableModel = (currentFolder.getClasses().get(row).getModel());
+        else{
+            tableModel = (currentFolder.getFolders().get(row).getModel());
+            currentFolder = currentFolder.getFolders().get(row);
+        }
+    }
+}
     private JBTable createTable(){
         return new JBTable(){
             public boolean isCellEditable(int rows, int columns){
-                if(table.isCellSelected(rows,columns) && table.isRowSelected(rows)){
-                    setupNextTable(true);
-                }
+                row = rows;
+                column = columns;
                 return false;
             }
         };
+    }
+
+    public void setRootFolder(Folder folder){
+        rootFolder = folder;
     }
 
     private void addToTable(Object[] data){
