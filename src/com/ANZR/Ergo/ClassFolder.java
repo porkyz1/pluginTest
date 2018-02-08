@@ -9,8 +9,11 @@ public class ClassFolder {
     private DefaultTableModel model = new DefaultTableModel();
     String[] tableHeader = {"AP Name", "Y/N"};
 
-    public ClassFolder(String name) {
+    public ClassFolder(String name, boolean loadDummyData) {
         this.name = name;
+        if(loadDummyData){
+            addAntiPattern(new AntiPattern("god", .5));
+        }
     }
 
     public String getName() {
@@ -24,11 +27,16 @@ public class ClassFolder {
     public DefaultTableModel getModel() {
         return makeModel();
     }
+    public void addAntiPattern(AntiPattern pattern){
+        this.antiPatterns.add(pattern);
+    }
 
     public DefaultTableModel makeModel(){
         Object[][] temp = new Object[antiPatterns.toArray().length][tableHeader.length];
         for (int x = 0; x < antiPatterns.toArray().length; x++) {
-            temp[x][0] = antiPatterns.get(x).getName();
+            if(antiPatterns.get(x).getName() != null)
+                temp[x][0] = antiPatterns.get(x).getName();
+            else temp[x][0] = "null";
             temp[x][1] = antiPatterns.get(x).getPercent();
         }
         return (new DefaultTableModel(temp, tableHeader));
