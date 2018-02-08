@@ -13,60 +13,67 @@ import java.awt.event.*;
 
 public class GenerateToolWindow implements ToolWindowFactory {
 
-    private JLabel projectName = new JLabel();
-    private JLabel projectURL = new JLabel();
     private JPanel contentWindow = new JPanel(new BorderLayout());
     private JBTable table = new JBTable();
+    private JLabel errorLabel = new JLabel();
 
-    int row;
-    int column;
-    Timer timer;
-    boolean wasDoubleClick;
-
-    private Folder rootFolder;
-    private Folder currentFolder;
-    private Stack previousFolder = new Stack();
-    private boolean isClass = false;
-    private ToolWindow toolWindow;
-    private DefaultTableModel tableModel = new DefaultTableModel();
-    private Project project;
     private JButton rootButton = new JButton();
     private JButton previousButton = new JButton();
     private JButton nextButton = new JButton();
     private JButton extraButton = new JButton();
 
-    String[][] tableHeader34 = {{"Element", "Number of AP"}, {"AP Name", "Y/N"}};
-    String[][] dummyData = {{"greg", "3"}, {"god", "maybe"}, {"jeff", "sure"}};
+    private int row;
+    private Timer timer;
+    private boolean wasDoubleClick;
+    private boolean isClass = false;
 
-    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder) {
+    private Folder rootFolder;
+    private Folder currentFolder;
+    private Stack previousFolder = new Stack();
+
+    private ToolWindow toolWindow;
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    private Project project;
+
+    private ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+    private Content content;
+
+    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder, int errorCode) {
         this.toolWindow = toolWindow;
         this.project = project;
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
         tableModel = currentFolder.getModel();
 
-        addButtons();
-        setupTable();
+        if (errorCode == 0) {
+            addButtons();
+            setupTable();
 
-        projectName.setText(this.project.getName());
-        projectURL.setText(this.project.getBasePath());
+        } else {
+            if(errorCode == 1) {
+                showErrorLabel("Please Build Project Before Running Ergo");
+            }
+            if (errorCode == 2) {
+                showErrorLabel("Please Highlight Proper Source Folder in the Project Tool Window Or Have Focus on a JAVA file inside that Source Folder");
+            }
+        }
 
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        Content content = contentFactory.createContent(contentWindow, "", false);
+        content = contentFactory.createContent(contentWindow, rootFolder.getName(), false);
         toolWindow.getContentManager().addContent(content);
         toolWindow.show(null);
     }
 
-    private JButton createButton(int x, int y, Icon icon){
+    private JButton createButton(int x, int y, Icon icon) {
         JButton button = new JButton();
         button.setIcon(icon);
-        button.setSize(30,30);
-        button.setLocation(x,y);
+        button.setSize(30, 30);
+        button.setLocation(x, y);
         return button;
     }
 
-    private void addButtons(){
-        rootButton = createButton(0,0,IconLoader.getIcon("/icons/button_image.png"));
+    private void addButtons() {
+        //fix button layout
+        rootButton = createButton(0, 0, IconLoader.getIcon("/icons/button_image.png"));
         rootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,7 +82,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
                 table.setModel(tableModel);
                 previousFolder.clear();
                 isClass = false;
-                if(previousFolder.isEmpty())
+                if (previousFolder.isEmpty())
                     previousButton.setEnabled(false);
                 else previousButton.setEnabled(true);
             }
@@ -83,20 +90,20 @@ public class GenerateToolWindow implements ToolWindowFactory {
         rootButton.setToolTipText("Go To Root Folder");
         contentWindow.add(rootButton, BorderLayout.LINE_START);
 
-        previousButton = createButton(0,30,IconLoader.getIcon("/icons/button_image.png"));
+        previousButton = createButton(0, 30, IconLoader.getIcon("/icons/button_image.png"));
         previousButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(previousFolder.empty())
+                if (previousFolder.empty())
                     previousButton.setEnabled(false);
                 else {
                     previousButton.setEnabled(true);
-                    currentFolder = (Folder)previousFolder.pop();
+                    currentFolder = (Folder) previousFolder.pop();
                     tableModel = currentFolder.getModel();
                     table.setModel(tableModel);
                     isClass = false;
                 }
-                if(previousFolder.isEmpty())
+                if (previousFolder.isEmpty())
                     previousButton.setEnabled(false);
                 else previousButton.setEnabled(true);
             }
@@ -104,21 +111,23 @@ public class GenerateToolWindow implements ToolWindowFactory {
         previousButton.setToolTipText("Go Back A Folder");
         contentWindow.add(previousButton, BorderLayout.LINE_START);
 
-        nextButton = createButton(0,60,IconLoader.getIcon("/icons/button_image.png"));
+        nextButton = createButton(0, 60, IconLoader.getIcon("/icons/button_image.png"));
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                previousFolder.push(currentFolder);
-                if(previousFolder.isEmpty())
-                    previousButton.setEnabled(false);
-                else previousButton.setEnabled(true);
-                createModel(row);
+                if (!isClass){
+//                    previousFolder.push(currentFolder);
+                    if (previousFolder.isEmpty())
+                        previousButton.setEnabled(false);
+                    else previousButton.setEnabled(true);
+                    createModel(row);
+                }
             }
         });
         nextButton.setToolTipText("Go into Folder");
         contentWindow.add(nextButton, BorderLayout.LINE_START);
 
-        extraButton = createButton(0,60,IconLoader.getIcon("/icons/button_image.png"));
+        extraButton = createButton(0, 60, IconLoader.getIcon("/icons/button_image.png"));
         extraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,6 +140,13 @@ public class GenerateToolWindow implements ToolWindowFactory {
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
     }
 
+    public void showErrorLabel(String error) {
+        //change color make more noticable
+        errorLabel.setText(error);
+        errorLabel.setVisible(true);
+        contentWindow.add(errorLabel, BorderLayout.CENTER);
+    }
+
     private void setupTable() {
         table = createTable();
         tableModel = rootFolder.getModel();
@@ -141,7 +157,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
         table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(previousFolder.isEmpty())
+                if (previousFolder.isEmpty())
                     previousButton.setEnabled(false);
                 else previousButton.setEnabled(true);
 
@@ -153,7 +169,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
                     timer = new Timer(timerinterval.intValue(), new ActionListener() {
 
                         public void actionPerformed(ActionEvent evt) {
-                            if((table.isRowSelected(row) && wasDoubleClick) && !isClass) {
+                            if ((table.isRowSelected(row) && wasDoubleClick) && !isClass) {
                                 createModel(row);
                                 wasDoubleClick = false;
                             }
@@ -164,22 +180,18 @@ public class GenerateToolWindow implements ToolWindowFactory {
                     timer.start();
                 }
             }
-
             @Override
             public void mousePressed(MouseEvent e) {
 
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
 
             }
-
             @Override
             public void mouseEntered(MouseEvent e) {
 
             }
-
             @Override
             public void mouseExited(MouseEvent e) {
 
@@ -191,39 +203,40 @@ public class GenerateToolWindow implements ToolWindowFactory {
 
     }
 
-    private void createModel(int rows){
+    private void createModel(int rows) {
         int nextClassIndex = currentFolder.findClassIndex(
                 tableModel.getValueAt(rows, 0).toString());
         int nextFolderIndex = currentFolder.findFolderIndex(
                 tableModel.getValueAt(rows, 0).toString());
 
         previousFolder.push(currentFolder);
-        if (tableModel.getValueAt(rows, 0).toString().contains(".java")){
+        if (tableModel.getValueAt(rows, 0).toString().contains(".java")) {
             tableModel = currentFolder.getClasses().get(nextClassIndex).getModel();
-                table.setModel(tableModel);
-                isClass = true;
-            }else{
-                tableModel = currentFolder.getFolders().get(nextFolderIndex).getModel();
-                currentFolder = currentFolder.getFolders().get(nextFolderIndex);
-                table.setModel(tableModel);
-            }
-        if(previousFolder.isEmpty())
+            table.setModel(tableModel);
+            isClass = true;
+        } else {
+            tableModel = currentFolder.getFolders().get(nextFolderIndex).getModel();
+            currentFolder = currentFolder.getFolders().get(nextFolderIndex);
+            table.setModel(tableModel);
+        }
+        if (previousFolder.isEmpty())
             previousButton.setEnabled(false);
         else previousButton.setEnabled(true);
     }
 
-    private JBTable createTable(){
-        return new JBTable(){
-            public boolean isCellEditable(int rows, int columns){
-                row=rows;
+    private JBTable createTable() {
+        return new JBTable() {
+            public boolean isCellEditable(int rows, int columns) {
+                row = rows;
                 return false;
             }
-            public Component prepareRenderer(TableCellRenderer cellRenderer, int rows, int columns){
-                Component c = super.prepareRenderer(cellRenderer,rows,columns);
-                if((int)table.getValueAt(rows, 1) > 0){
+
+            public Component prepareRenderer(TableCellRenderer cellRenderer, int rows, int columns) {
+                Component c = super.prepareRenderer(cellRenderer, rows, columns);
+                if (!table.getValueAt(rows, 1).equals(0)) {
                     c.setBackground(Color.RED);
                     c.setForeground(Color.BLACK);
-                }else {
+                } else {
                     c.setBackground(Color.DARK_GRAY);
                     c.setForeground(Color.LIGHT_GRAY);
                 }
@@ -231,5 +244,4 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         };
     }
-
 }

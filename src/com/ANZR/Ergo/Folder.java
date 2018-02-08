@@ -22,8 +22,6 @@ public class Folder {
         this.name = name;
         this.folders = folder.getFolders();
         this.classes = folder.getClasses();
-//        if(folder.getModel() != null)
-//            this.model = folder.getModel();
     }
     public void addClass(ClassFolder classe){
         this.classes.add(classe);
