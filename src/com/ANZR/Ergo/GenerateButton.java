@@ -1,31 +1,33 @@
 package com.ANZR.Ergo;
 
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 
+import java.util.ArrayList;
+
 public class GenerateButton extends AnAction {
-    Project project;
-    ToolWindow toolWindow;
-    Folder moduleFolder;
-    int errorCode = 0;
+    private Project project;
+    private ToolWindow toolWindow;
+    private Folder moduleFolder;
 
 
     @Override
     public void actionPerformed(AnActionEvent e) {
         project = e.getData(LangDataKeys.PROJECT);
         toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Ergo");
-        try {
-            moduleFolder = printProjectFiles(ModuleRootManager.getInstance(e.getData(LangDataKeys.MODULE)).getSourceRoots(), 0, new Folder(project.getName()));
-//            moduleFolder = printProjectFiles(project.getBaseDir().getChildren(),0,new Folder(project.getProjectFile().getName()));
-        }catch(IllegalArgumentException badFocus){
-            errorCode = 2;
-        }
+        VirtualFile[] files = ProjectRootManager.getInstance(project).getContentSourceRoots();
+        moduleFolder = getModuleFolder("root", files);
+
+        Printer.printProjectFiles(moduleFolder);
+
         GenerateToolWindow tool = new GenerateToolWindow();
-        tool.populateToolWindow(project,toolWindow, moduleFolder, errorCode);
+        tool.populateToolWindow(project, toolWindow, moduleFolder);
     }
 
 
@@ -33,19 +35,25 @@ public class GenerateButton extends AnAction {
     public void update(AnActionEvent e) {
     }
 
-    public Folder printProjectFiles(VirtualFile[] dir, int tab, Folder buildFolder) {
-        for (int x = 0; x < dir.length; x++) {
-            for (int y = 0; y < tab; y++)
-                System.out.print("  ");
-            System.out.println(dir[x].getName() + " " + dir[x].getExtension() + " " + dir[x].getFileType().getName());
+    private Folder getModuleFolder(String folderName, VirtualFile[] sourceFolders){
+        Folder buildFolder = new Folder(folderName);
 
-            if(dir[x].getFileType().getName() == "JAVA"){
-                buildFolder.addClass(new ClassFolder(dir[x].getName(), true));
-            }else {
-                buildFolder.addFolder(printProjectFiles(dir[x].getChildren(), tab + 1, new Folder(dir[x].getName())));
-            }//make not folder of class array
+        for (int i = 0; i < sourceFolders.length; i++) {
+
+            if(sourceFolders[i].getFileType().getName() == "JAVA"){
+                buildFolder.addClass(new ClassFolder(sourceFolders[i].getName(), true));
+            }else if (sourceFolders[i].isDirectory()){
+                Folder childFolder = getModuleFolder(sourceFolders[i].getName(), sourceFolders[i].getChildren());
+                buildFolder.addFolder(childFolder);
+            }else{
+                System.out.println("ERROR: We got something that was not a Java file or folder...");
+            }
         }
+
         return buildFolder;
     }
+
+
+
 }
 

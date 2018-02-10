@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63b29f49-18f7-438e-ba3f-9a9d9af4f808" name="Default" comment="" />
+    <list default="true" id="63b29f49-18f7-438e-ba3f-9a9d9af4f808" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/back.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/back_dark.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/into.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/into_dark.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/root.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/icons/root_dark.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/ANZR/Ergo/Printer.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/Folder.class" afterPath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/Folder.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateButton.class" afterPath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateButton.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$2.class" afterPath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$2.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$3.class" afterPath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$3.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$5$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow$6.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow.class" afterPath="$PROJECT_DIR$/out/production/SeniorProject/com/ANZR/Ergo/GenerateToolWindow.class" />
+      <change beforePath="$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java" afterPath="$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java" afterPath="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java" afterPath="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,35 +37,33 @@
       <file leaf-file-name="GenerateToolWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="74" column="27" lean-forward="false" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+            <state relative-caret-position="629">
+              <caret line="66" column="31" lean-forward="false" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#populateToolWindow#0;class#GenerateToolWindow#0" expanded="false" />
                 <element signature="method#createButton#0;class#GenerateToolWindow#0" expanded="false" />
-                <element signature="method#actionPerformed#0;class#2606:3094" expanded="false" />
-                <element signature="method#actionPerformed#0;class#3356:4034" expanded="false" />
-                <element signature="e#5076#5077#0" expanded="true" />
-                <element signature="e#5135#5136#0" expanded="true" />
-                <element signature="method#setupTable#0;class#GenerateToolWindow#0" expanded="false" />
-                <element signature="method#mouseClicked#0;class#5881:7319" expanded="false" />
-                <element signature="method#mousePressed#0;class#5881:7319" expanded="false" />
-                <element signature="method#mouseReleased#0;class#5881:7319" expanded="false" />
-                <element signature="method#mouseEntered#0;class#5881:7319" expanded="false" />
-                <element signature="method#mouseExited#0;class#5881:7319" expanded="false" />
+                <element signature="class#2303:2791" expanded="false" />
+                <element signature="method#actionPerformed#0;class#2303:2791" expanded="false" />
+                <element signature="class#3177:3855" expanded="false" />
+                <element signature="method#actionPerformed#0;class#3177:3855" expanded="false" />
+                <element signature="class#4241:4673" expanded="false" />
+                <element signature="method#actionPerformed#0;class#4241:4673" expanded="false" />
+                <element signature="class#5021:5187" expanded="false" />
+                <element signature="method#createToolWindowContent#0;class#GenerateToolWindow#0" expanded="false" />
+                <element signature="method#showErrorLabel#0;class#GenerateToolWindow#0" expanded="false" />
+                <element signature="class#6059:7497" expanded="false" />
+                <element signature="method#mouseClicked#0;class#6059:7497" expanded="false" />
+                <element signature="class#6646:7012" expanded="false" />
+                <element signature="method#actionPerformed#0;class#6646:7012" expanded="false" />
+                <element signature="method#mousePressed#0;class#6059:7497" expanded="false" />
+                <element signature="method#mouseReleased#0;class#6059:7497" expanded="false" />
+                <element signature="method#mouseEntered#0;class#6059:7497" expanded="false" />
+                <element signature="method#mouseExited#0;class#6059:7497" expanded="false" />
                 <element signature="method#createModel#0;class#GenerateToolWindow#0" expanded="false" />
                 <element signature="method#createTable#0;class#GenerateToolWindow#0" expanded="false" />
+                <element signature="class#8719:9414" expanded="false" />
+                <element signature="method#isCellEditable#0;class#8719:9414" expanded="false" />
+                <element signature="method#prepareRenderer#0;class#8719:9414" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="34" column="35" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="34" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -51,8 +71,8 @@
       <file leaf-file-name="GenerateButton.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+            <state relative-caret-position="606">
+              <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,9 +83,16 @@
       <file leaf-file-name="Folder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="311">
+              <caret line="68" column="30" lean-forward="false" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+              <folding>
+                <element signature="e#483#484#0" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#1110#1111#0" expanded="true" />
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="method#findFolderIndex#0;class#Folder#0" expanded="false" />
+                <element signature="method#findClassIndex#0;class#Folder#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,7 +100,7 @@
       <file leaf-file-name="ClassFolder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/ClassFolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
+            <state relative-caret-position="120">
               <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
             </state>
@@ -83,7 +110,7 @@
       <file leaf-file-name="AntiPattern.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/AntiPattern.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="210">
               <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
@@ -91,6 +118,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -103,6 +137,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java" />
+        <option value="$PROJECT_DIR$/src/com/ANZR/Ergo/Printer.java" />
         <option value="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java" />
         <option value="$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java" />
       </list>
@@ -122,7 +158,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="-1418" />
     <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
@@ -141,9 +177,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,6 +196,12 @@
               <item name="pluginTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="pluginTest" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pluginTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pluginTest" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="icons" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pluginTest" type="b2602c69:ProjectViewProjectNode" />
@@ -182,7 +224,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -190,9 +232,15 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ross\Desktop\pluginTest\resources\icons" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -311,43 +359,45 @@
       <workItem from="1518103685251" duration="542000" />
       <workItem from="1518107914702" duration="711000" />
       <workItem from="1518109314081" duration="4723000" />
+      <workItem from="1518279958254" duration="8841000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5976000" />
+    <option name="totallyTimeSpent" value="14817000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858595" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.108333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39979655" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,25 +410,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java</url>
-          <line>45</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java</url>
-          <line>143</line>
+          <line>156</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java</url>
-          <line>74</line>
+          <url>file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java</url>
+          <line>26</line>
           <properties />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -388,21 +432,110 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#populateToolWindow#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createButton#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2606:3094" expanded="false" />
-            <element signature="method#actionPerformed#0;class#3356:4034" expanded="false" />
-            <element signature="e#5076#5077#0" expanded="true" />
-            <element signature="e#5135#5136#0" expanded="true" />
-            <element signature="method#setupTable#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#mouseClicked#0;class#5881:7319" expanded="false" />
-            <element signature="method#mousePressed#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseReleased#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseEntered#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseExited#0;class#5881:7319" expanded="false" />
+            <element signature="class#2303:2791" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2303:2791" expanded="false" />
+            <element signature="class#3177:3855" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3177:3855" expanded="false" />
+            <element signature="class#4241:4673" expanded="false" />
+            <element signature="method#actionPerformed#0;class#4241:4673" expanded="false" />
+            <element signature="class#5021:5187" expanded="false" />
+            <element signature="method#createToolWindowContent#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="method#showErrorLabel#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#6059:7497" expanded="false" />
+            <element signature="method#mouseClicked#0;class#6059:7497" expanded="false" />
+            <element signature="class#6646:7012" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6646:7012" expanded="false" />
+            <element signature="method#mousePressed#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseReleased#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseEntered#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseExited#0;class#6059:7497" expanded="false" />
             <element signature="method#createModel#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createTable#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#8719:9414" expanded="false" />
+            <element signature="method#isCellEditable#0;class#8719:9414" expanded="false" />
+            <element signature="method#prepareRenderer#0;class#8719:9414" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="34" column="35" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="34" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#findFolderIndex#0;class#Folder#0" expanded="false" />
+            <element signature="method#findClassIndex#0;class#Folder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/ClassFolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/AntiPattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#createButton#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#2303:2791" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2303:2791" expanded="false" />
+            <element signature="class#3177:3855" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3177:3855" expanded="false" />
+            <element signature="class#4241:4673" expanded="false" />
+            <element signature="method#actionPerformed#0;class#4241:4673" expanded="false" />
+            <element signature="class#5021:5187" expanded="false" />
+            <element signature="method#createToolWindowContent#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="method#showErrorLabel#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#6059:7497" expanded="false" />
+            <element signature="method#mouseClicked#0;class#6059:7497" expanded="false" />
+            <element signature="class#6646:7012" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6646:7012" expanded="false" />
+            <element signature="method#mousePressed#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseReleased#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseEntered#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseExited#0;class#6059:7497" expanded="false" />
+            <element signature="method#createModel#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="method#createTable#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#8719:9414" expanded="false" />
+            <element signature="method#isCellEditable#0;class#8719:9414" expanded="false" />
+            <element signature="method#prepareRenderer#0;class#8719:9414" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -429,7 +562,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#findFolderIndex#0;class#Folder#0" expanded="false" />
+            <element signature="method#findClassIndex#0;class#Folder#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -454,21 +594,29 @@
         <state relative-caret-position="22">
           <caret line="1" column="7" lean-forward="true" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#populateToolWindow#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createButton#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2606:3094" expanded="false" />
-            <element signature="method#actionPerformed#0;class#3356:4034" expanded="false" />
-            <element signature="e#5076#5077#0" expanded="true" />
-            <element signature="e#5135#5136#0" expanded="true" />
-            <element signature="method#setupTable#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#mouseClicked#0;class#5881:7319" expanded="false" />
-            <element signature="method#mousePressed#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseReleased#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseEntered#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseExited#0;class#5881:7319" expanded="false" />
+            <element signature="class#2303:2791" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2303:2791" expanded="false" />
+            <element signature="class#3177:3855" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3177:3855" expanded="false" />
+            <element signature="class#4241:4673" expanded="false" />
+            <element signature="method#actionPerformed#0;class#4241:4673" expanded="false" />
+            <element signature="class#5021:5187" expanded="false" />
+            <element signature="method#createToolWindowContent#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="method#showErrorLabel#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#6059:7497" expanded="false" />
+            <element signature="method#mouseClicked#0;class#6059:7497" expanded="false" />
+            <element signature="class#6646:7012" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6646:7012" expanded="false" />
+            <element signature="method#mousePressed#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseReleased#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseEntered#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseExited#0;class#6059:7497" expanded="false" />
             <element signature="method#createModel#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createTable#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#8719:9414" expanded="false" />
+            <element signature="method#isCellEditable#0;class#8719:9414" expanded="false" />
+            <element signature="method#prepareRenderer#0;class#8719:9414" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -495,7 +643,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#findFolderIndex#0;class#Folder#0" expanded="false" />
+            <element signature="method#findClassIndex#0;class#Folder#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -515,25 +670,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="34" column="35" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="34" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/ClassFolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
+        <state relative-caret-position="120">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
         </state>
@@ -549,16 +688,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/AntiPattern.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="210">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="711">
+          <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/actionSystem/AnActionEvent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="247" column="17" lean-forward="false" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/fileTypes/FileType.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/Printer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#131#132#0" expanded="true" />
+            <element signature="e#167#168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="971" column="16" lean-forward="false" selection-start-line="971" selection-start-column="16" selection-end-line="971" selection-end-column="16" />
+          <folding>
+            <element signature="e#37566#37567#0" expanded="false" />
+            <element signature="e#37612#37613#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/Folder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="68" column="30" lean-forward="false" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+          <folding>
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#findFolderIndex#0;class#Folder#0" expanded="false" />
+            <element signature="method#findClassIndex#0;class#Folder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+        <state relative-caret-position="606">
+          <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -567,24 +767,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ANZR/Ergo/GenerateToolWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="74" column="27" lean-forward="false" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+        <state relative-caret-position="629">
+          <caret line="66" column="31" lean-forward="false" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#populateToolWindow#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createButton#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2606:3094" expanded="false" />
-            <element signature="method#actionPerformed#0;class#3356:4034" expanded="false" />
-            <element signature="e#5076#5077#0" expanded="true" />
-            <element signature="e#5135#5136#0" expanded="true" />
-            <element signature="method#setupTable#0;class#GenerateToolWindow#0" expanded="false" />
-            <element signature="method#mouseClicked#0;class#5881:7319" expanded="false" />
-            <element signature="method#mousePressed#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseReleased#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseEntered#0;class#5881:7319" expanded="false" />
-            <element signature="method#mouseExited#0;class#5881:7319" expanded="false" />
+            <element signature="class#2303:2791" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2303:2791" expanded="false" />
+            <element signature="class#3177:3855" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3177:3855" expanded="false" />
+            <element signature="class#4241:4673" expanded="false" />
+            <element signature="method#actionPerformed#0;class#4241:4673" expanded="false" />
+            <element signature="class#5021:5187" expanded="false" />
+            <element signature="method#createToolWindowContent#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="method#showErrorLabel#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#6059:7497" expanded="false" />
+            <element signature="method#mouseClicked#0;class#6059:7497" expanded="false" />
+            <element signature="class#6646:7012" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6646:7012" expanded="false" />
+            <element signature="method#mousePressed#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseReleased#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseEntered#0;class#6059:7497" expanded="false" />
+            <element signature="method#mouseExited#0;class#6059:7497" expanded="false" />
             <element signature="method#createModel#0;class#GenerateToolWindow#0" expanded="false" />
             <element signature="method#createTable#0;class#GenerateToolWindow#0" expanded="false" />
+            <element signature="class#8719:9414" expanded="false" />
+            <element signature="method#isCellEditable#0;class#8719:9414" expanded="false" />
+            <element signature="method#prepareRenderer#0;class#8719:9414" expanded="false" />
           </folding>
         </state>
       </provider>

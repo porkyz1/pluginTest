@@ -15,17 +15,21 @@ public class Folder {
 
     public Folder() {
     }
+
     public Folder(String name) {
         this.name = name;
     }
+
     public Folder(String name, Folder folder) {
         this.name = name;
         this.folders = folder.getFolders();
         this.classes = folder.getClasses();
     }
+
     public void addClass(ClassFolder classe){
         this.classes.add(classe);
     }
+
     public void addFolder(Folder folder){
         this.folders.add(folder);
     }
@@ -45,6 +49,7 @@ public class Folder {
     public DefaultTableModel getModel() {
         return makeModel();
     }
+
     public int findFolderIndex(String name){
         for (int x = 0; x < folders.toArray().length; x++) {
             if(folders.get(x).getName() == name)
@@ -52,6 +57,7 @@ public class Folder {
         }
         return -1;
     }
+
     public int findClassIndex(String name){
         for (int x = 0; x < classes.toArray().length; x++) {
             if(classes.get(x).getName() == name)

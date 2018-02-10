@@ -14,6 +14,7 @@ import java.awt.event.*;
 public class GenerateToolWindow implements ToolWindowFactory {
 
     private JPanel contentWindow = new JPanel(new BorderLayout());
+    private JPanel sideBarView = new JPanel(new GridBagLayout());
     private JBTable table = new JBTable();
     private JLabel errorLabel = new JLabel();
 
@@ -38,25 +39,17 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
     private Content content;
 
-    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder, int errorCode) {
+    public void populateToolWindow(Project project, ToolWindow toolWindow, Folder rootFolder) {
         this.toolWindow = toolWindow;
         this.project = project;
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
-        tableModel = currentFolder.getModel();
+        this.tableModel = currentFolder.getModel();
 
-        if (errorCode == 0) {
-            addButtons();
-            setupTable();
+        addButtons();
+        setupTable();
 
-        } else {
-            if(errorCode == 1) {
-                showErrorLabel("Please Build Project Before Running Ergo");
-            }
-            if (errorCode == 2) {
-                showErrorLabel("Please Highlight Proper Source Folder in the Project Tool Window Or Have Focus on a JAVA file inside that Source Folder");
-            }
-        }
+
 
         content = contentFactory.createContent(contentWindow, rootFolder.getName(), false);
         toolWindow.getContentManager().addContent(content);
@@ -72,8 +65,10 @@ public class GenerateToolWindow implements ToolWindowFactory {
     }
 
     private void addButtons() {
-        //fix button layout
-        rootButton = createButton(0, 0, IconLoader.getIcon("/icons/button_image.png"));
+
+        contentWindow.add(sideBarView, BorderLayout.LINE_START);
+
+        rootButton = createButton(0, 0, IconLoader.getIcon("/icons/root.png"));
         rootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,9 +83,13 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         });
         rootButton.setToolTipText("Go To Root Folder");
-        contentWindow.add(rootButton, BorderLayout.LINE_START);
 
-        previousButton = createButton(0, 30, IconLoader.getIcon("/icons/button_image.png"));
+        GridBagConstraints rootConstraints = new GridBagConstraints();
+        rootConstraints.gridx = 0;
+        rootConstraints.gridy = 0;
+        sideBarView.add(rootButton, rootConstraints);
+
+        previousButton = createButton(0, 30, IconLoader.getIcon("/icons/back.png"));
         previousButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,9 +108,13 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         });
         previousButton.setToolTipText("Go Back A Folder");
-        contentWindow.add(previousButton, BorderLayout.LINE_START);
 
-        nextButton = createButton(0, 60, IconLoader.getIcon("/icons/button_image.png"));
+        GridBagConstraints prevConstraints = new GridBagConstraints();
+        prevConstraints.gridx = 0;
+        prevConstraints.gridy = 31;
+        sideBarView.add(previousButton, prevConstraints);
+
+        nextButton = createButton(0, 60, IconLoader.getIcon("/icons/into.png"));
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,16 +128,26 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         });
         nextButton.setToolTipText("Go into Folder");
-        contentWindow.add(nextButton, BorderLayout.LINE_START);
 
-        extraButton = createButton(0, 60, IconLoader.getIcon("/icons/button_image.png"));
+        GridBagConstraints nextC = new GridBagConstraints();
+        nextC.gridx = 0;
+        nextC.gridy = 62;
+        sideBarView.add(nextButton, nextC);
+
+
+
+        extraButton = createButton(0, 90, IconLoader.getIcon("/icons/button_image.png"));
         extraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("extra");
             }
         });
-        contentWindow.add(extraButton, BorderLayout.LINE_START);
+
+        GridBagConstraints extraConstraints = new GridBagConstraints();
+        extraConstraints.gridx = 0;
+        extraConstraints.gridy = 93;
+        sideBarView.add(extraButton, extraConstraints);
     }
 
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
@@ -198,8 +211,12 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         });
 
+        GridBagConstraints tableC = new GridBagConstraints();
+        tableC.gridx = 0;
+        tableC.gridy = 0;
+
         contentWindow.add(new JScrollPane(table));
-        contentWindow.add(table.getTableHeader(), BorderLayout.NORTH);
+        contentWindow.add(table.getTableHeader(), BorderLayout.EAST);
 
     }
 
