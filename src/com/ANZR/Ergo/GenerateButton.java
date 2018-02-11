@@ -8,24 +8,19 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 
 public class GenerateButton extends AnAction {
-    private Project project;
-    private ToolWindow toolWindow;
-    private Folder moduleFolder;
-    private VirtualFile[] files;
-
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        project = e.getData(LangDataKeys.PROJECT);
-        toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Ergo");
-        files = ProjectRootManager.getInstance(project).getContentSourceRoots();
-        moduleFolder = getModuleFolder(project.getName(), files);
+        Project project = e.getData(LangDataKeys.PROJECT);
+        ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Ergo");
+        VirtualFile[] files = ProjectRootManager.getInstance(project).getContentSourceRoots();
+        Folder moduleFolder = getModuleFolder(project.getName(), files);
 
-        Printer.printProjectFiles(moduleFolder);
+//        Printer.printProjectFiles(moduleFolder);
+
         GenerateToolWindow tool = new GenerateToolWindow();
         tool.populateToolWindow(toolWindow, moduleFolder);
     }
-
 
     @Override
     public void update(AnActionEvent e) {
