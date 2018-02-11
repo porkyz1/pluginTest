@@ -1,15 +1,12 @@
 package com.ANZR.Ergo;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.*;
 import com.intellij.ui.content.*;
-import com.intellij.ui.table.JBTable;
 import com.intellij.util.containers.Stack;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class GenerateToolWindow implements ToolWindowFactory {
 
@@ -19,7 +16,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private SideBar sideBar = new SideBar(this);
     private Table table;
     private JLabel errorLabel = new JLabel();
-    private boolean isClass = false;
     private Folder rootFolder;
     private Folder currentFolder;
     private Stack previousFolder = new Stack();
@@ -56,28 +52,24 @@ public class GenerateToolWindow implements ToolWindowFactory {
     }
 
     public void createModel(int rows) {
-        int nextClassIndex = currentFolder.findClassIndex(
+        int nextFileIndex = currentFolder.findFileIndex(
                 tableModel.getValueAt(rows, 0).toString());
-        int nextFolderIndex = currentFolder.findFolderIndex(
-                tableModel.getValueAt(rows, 0).toString());
-
-        previousFolder.push(currentFolder);
-        if (tableModel.getValueAt(rows, 0).toString().contains(".java")) {
-            tableModel = currentFolder.getClasses().get(nextClassIndex).getModel();
-            table.setModel(tableModel);
-            isClass = true;
-        } else {
-            tableModel = currentFolder.getFolders().get(nextFolderIndex).getModel();
-            currentFolder = currentFolder.getFolders().get(nextFolderIndex);
+        if (previousFolder.isEmpty() || !currentFolder.isClass()){
+            previousFolder.push(currentFolder);
+            tableModel = currentFolder.getFolders().get(nextFileIndex).getModel();
+            currentFolder = currentFolder.getFolders().get(nextFileIndex);
             table.setModel(tableModel);
         }
+        checkButtonEnable();
+    }
+
+    void checkButtonEnable(){
         if (previousFolder.isEmpty())sideBar.getPreviousButton().setEnabled(false);
         else sideBar.getPreviousButton().setEnabled(true);
 
-        if(isClass)sideBar.getNextButton().setEnabled(false);
+        if(currentFolder.isClass())sideBar.getNextButton().setEnabled(false);
         else sideBar.getNextButton().setEnabled(true);
     }
-
 
     //SIDE BAR FUNCTIONS
     public void returnToRootFolder(){
@@ -85,45 +77,23 @@ public class GenerateToolWindow implements ToolWindowFactory {
         currentFolder = rootFolder;
         table.setModel(tableModel);
         previousFolder.clear();
-        isClass = false;
-        if (previousFolder.isEmpty()) sideBar.getPreviousButton().setEnabled(false);
-        else sideBar.getPreviousButton().setEnabled(true);
-
-        if (isClass) sideBar.getNextButton().setEnabled(false);
-        else sideBar.getNextButton().setEnabled(true);
+        checkButtonEnable();
     }
 
     public void previousFolder(){
-        if (previousFolder.empty())
-            sideBar.getPreviousButton().setEnabled(false);
-        else {
+        if (!previousFolder.empty()){
             sideBar.getPreviousButton().setEnabled(true);
             currentFolder = (Folder) previousFolder.pop();
             tableModel = currentFolder.getModel();
             table.setModel(tableModel);
-            isClass = false;
         }
-        if (previousFolder.isEmpty()) sideBar.getPreviousButton().setEnabled(false);
-        else sideBar.getPreviousButton().setEnabled(true);
-
-        if (isClass) sideBar.getNextButton().setEnabled(false);
-        else sideBar.getNextButton().setEnabled(true);
+        checkButtonEnable();
     }
 
     public void nextFolder(){
-        if (!isClass) {
-            if (previousFolder.isEmpty())
-                sideBar.getPreviousButton().setEnabled(false);
-            else
-                sideBar.getPreviousButton().setEnabled(true);
-
-            if (isClass)
-                sideBar.getNextButton().setEnabled(false);
-            else
-                sideBar.getNextButton().setEnabled(true);
-
+        if (!currentFolder.isClass())
             createModel(table.getRow());
-        }
+        checkButtonEnable();
     }
 
     public void extraButtonPressed(){
@@ -134,10 +104,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
     //Setters + Getters
     public SideBar getSideBar() {
         return sideBar;
-    }
-
-    public boolean getIsClass() {
-        return isClass;
     }
 
     public Stack getPreviousFolder() {

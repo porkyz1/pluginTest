@@ -1,36 +1,32 @@
 package com.ANZR.Ergo;
 
-import org.jetbrains.annotations.Nullable;
-
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Folder {
     private String name;
     private ArrayList<Folder> folders = new ArrayList<>();
-    private ArrayList<ClassFolder> classes= new ArrayList<>();
-    private String[] tableHeader = {"Element", "Number of AP"};
+    private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
 
-    public Folder() {
-    }
+    private String[] classTableHeader = {"AP Name", "Y/N"};
+    private String[] FolderTableHeader = {"Element", "Number of AP"};
+    private boolean isClass = false;
 
     public Folder(String name) {
         this.name = name;
     }
 
-    public Folder(String name, Folder folder) {
+    public Folder(String name, boolean isClass) {
         this.name = name;
-        this.folders = folder.getFolders();
-        this.classes = folder.getClasses();
-    }
-
-    public void addClass(ClassFolder classe){
-        this.classes.add(classe);
+        this.isClass = isClass;
+        addAntiPattern(new AntiPattern("god", .5));
     }
 
     public void addFolder(Folder folder){
         this.folders.add(folder);
+    }
+    public void addAntiPattern(AntiPattern pattern){
+        this.antiPatterns.add(pattern);
     }
 
     public String getName() {
@@ -41,15 +37,21 @@ public class Folder {
         return folders;
     }
 
-    public ArrayList<ClassFolder> getClasses() {
-        return classes;
+    public ArrayList<AntiPattern> getAntiPatterns() {
+        return antiPatterns;
     }
 
     public DefaultTableModel getModel() {
-        return makeModel();
+        if(isClass)
+            return makeClassModel();
+        else return makeFolderModel();
     }
 
-    public int findFolderIndex(String name){
+    public boolean isClass() {
+        return isClass;
+    }
+
+    public int findFileIndex(String name){
         for (int x = 0; x < folders.toArray().length; x++) {
             if(folders.get(x).getName() == name)
                 return x;
@@ -57,30 +59,33 @@ public class Folder {
         return -1;
     }
 
-    public int findClassIndex(String name){
-        for (int x = 0; x < classes.toArray().length; x++) {
-            if(classes.get(x).getName() == name)
-                return x;
-        }
-        return -1;
-    }
-
-    private DefaultTableModel makeModel(){
-        Object[][] temp = new Object[folders.toArray().length+
-                classes.toArray().length][tableHeader.length];
+    private DefaultTableModel makeFolderModel(){
+        Object[][] temp = new Object[folders.toArray().length][FolderTableHeader.length];
         for (int x = 0; x < folders.toArray().length; x++) {
             if(folders.get(x).getName() != null)
                 temp[x][0] = folders.get(x).getName();
             else temp[x][0] = "null";
-                temp[x][1] = folders.get(x).getFolders().toArray().length+
-                        folders.get(x).getClasses().toArray().length;
+            temp[x][1] = getAntiPatternNumber(folders);
         }
-        for (int x = 0; x < classes.toArray().length; x++) {
-            if(classes.get(x).getName() != null)
-                temp[x+folders.toArray().length][0] = classes.get(x).getName();
-            else temp[x+folders.toArray().length][0] = "null";
-                temp[x+folders.toArray().length][1] = classes.toArray().length;
+        return (new DefaultTableModel(temp, FolderTableHeader));
+    }
+
+    private int getAntiPatternNumber(ArrayList<Folder> folder){
+        int temp = 0;
+        for (Folder f : folder) {
+            temp += (f.getAntiPatterns().toArray().length + getAntiPatternNumber(f.getFolders()));
         }
-        return (new DefaultTableModel(temp, tableHeader));
+        return temp;
+    }
+
+    private DefaultTableModel makeClassModel(){
+        Object[][] temp = new Object[antiPatterns.toArray().length][classTableHeader.length];
+        for (int x = 0; x < antiPatterns.toArray().length; x++) {
+            if(antiPatterns.get(x).getName() != null)
+                temp[x][0] = antiPatterns.get(x).getName();
+            else temp[x][0] = "null";
+            temp[x][1] = antiPatterns.get(x).getPercent();
+        }
+        return (new DefaultTableModel(temp, classTableHeader));
     }
 }

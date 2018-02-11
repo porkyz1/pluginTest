@@ -58,10 +58,6 @@ public class Table extends JBTable {
     }
 
     private void click(MouseEvent e){
-        if (parent.getPreviousFolder().isEmpty())
-            parent.getSideBar().getPreviousButton().setEnabled(false);
-        else parent.getSideBar().getPreviousButton().setEnabled(true);
-
         if (e.getClickCount() == 2) {
             wasDoubleClick = true;
         } else {
@@ -70,7 +66,7 @@ public class Table extends JBTable {
             timer = new Timer(timerinterval.intValue(), new ActionListener() {
 
                 public void actionPerformed(ActionEvent evt) {
-                    if ((isRowSelected(row) && wasDoubleClick) && !parent.getIsClass()) {
+                    if (isRowSelected(row) && wasDoubleClick) {
                         parent.createModel(row);
                         wasDoubleClick = false;
                     }

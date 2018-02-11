@@ -14,12 +14,8 @@ public class SideBar extends JPanel {
     private JButton rootButton = new JButton();
     private JButton previousButton = new JButton();
     private JButton nextButton = new JButton();
-    private JButton extraButton = new JButton();
+//    private JButton extraButton = new JButton();
     private GenerateToolWindow parent;
-
-    private SideBar(){
-        //Do not allow empty init
-    }
 
     SideBar(GenerateToolWindow parent) {
         super(new GridBagLayout());
@@ -41,12 +37,13 @@ public class SideBar extends JPanel {
                     add(previousButton, constraints);
                     break;
                 case 2:
+                    constraints.weighty = 20;
                     add(nextButton, constraints);
                     break;
-                case 3:
-                    constraints.weighty = 20;
-                    add(extraButton, constraints);
-                    break;
+//                case 3:
+//                    constraints.weighty = 20;
+//                    add(extraButton, constraints);
+//                    break;
             }
             row++;
         }
@@ -79,13 +76,14 @@ public class SideBar extends JPanel {
             }
         });
 
-        extraButton = createButton("extra", IconLoader.getIcon("/icons/button_image.png"));
-        extraButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parent.extraButtonPressed();
-            }
-        });
+        //fund use or remove
+//        extraButton = createButton("extra", IconLoader.getIcon("/icons/button_image.png"));
+//        extraButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                parent.extraButtonPressed();
+//            }
+//        });
 
     }
 
@@ -109,8 +107,8 @@ public class SideBar extends JPanel {
         return nextButton;
     }
 
-    public JButton getExtraButton() {
-        return extraButton;
-    }
+//    public JButton getExtraButton() {
+//        return extraButton;
+//    }
 
 }
