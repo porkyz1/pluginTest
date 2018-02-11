@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Folder {
-    String name;
-    ArrayList<Folder> folders = new ArrayList<>();
-    ArrayList<ClassFolder> classes= new ArrayList<>();
-    DefaultTableModel model = new DefaultTableModel();
-    String[] tableHeader = {"Element", "Number of AP"};
+    private String name;
+    private ArrayList<Folder> folders = new ArrayList<>();
+    private ArrayList<ClassFolder> classes= new ArrayList<>();
+    private String[] tableHeader = {"Element", "Number of AP"};
 
     public Folder() {
     }

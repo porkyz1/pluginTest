@@ -6,8 +6,7 @@ import java.util.ArrayList;
 public class ClassFolder {
     private String name;
     private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
-    private DefaultTableModel model = new DefaultTableModel();
-    String[] tableHeader = {"AP Name", "Y/N"};
+    private String[] tableHeader = {"AP Name", "Y/N"};
 
     public ClassFolder(String name, boolean loadDummyData) {
         this.name = name;

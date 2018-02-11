@@ -16,14 +16,14 @@ public class Printer {
         System.out.println(getTabString(numTab) + folder.getName());
         printClasses(classes, numTab + 1);
 
-        for(int i = 0; i < folders.size(); i++)
-            printFolder(folders.get(i), numTab + 1);
+        for(Folder f : folders)
+            printFolder(f, numTab + 1);
 
     }
 
     private static void printClasses(ArrayList<ClassFolder> classes, int numTab){
-        for (int i = 0; i < classes.size(); i++)
-            System.out.println(getTabString(numTab) + "Class: " + classes.get(i).getName());
+        for (ClassFolder c : classes)
+            System.out.println(getTabString(numTab) + "Class: " + c.getName());
     }
 
     private static String getTabString(int numberOfTabs){

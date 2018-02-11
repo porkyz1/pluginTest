@@ -14,9 +14,9 @@ import java.awt.event.*;
 public class GenerateToolWindow implements ToolWindowFactory {
 
     private JPanel contentWindow = new JPanel(new BorderLayout());
-    private JPanel sideBarView = new JPanel(new GridBagLayout());
     private JBTable table = new JBTable();
     private JLabel errorLabel = new JLabel();
+    private SideBar sideBar = new SideBar();
 
     private JButton rootButton = new JButton();
     private JButton previousButton = new JButton();
@@ -49,26 +49,22 @@ public class GenerateToolWindow implements ToolWindowFactory {
         addButtons();
         setupTable();
 
-
-
         content = contentFactory.createContent(contentWindow, rootFolder.getName(), false);
+        toolWindow.getContentManager().removeAllContents(true);
         toolWindow.getContentManager().addContent(content);
         toolWindow.show(null);
     }
 
-    private JButton createButton(int x, int y, Icon icon) {
+    private JButton createButton(String popupText, Icon icon) {
         JButton button = new JButton();
         button.setIcon(icon);
         button.setSize(30, 30);
-        button.setLocation(x, y);
+        button.setToolTipText(popupText);
         return button;
     }
 
     private void addButtons() {
-
-        contentWindow.add(sideBarView, BorderLayout.LINE_START);
-
-        rootButton = createButton(0, 0, IconLoader.getIcon("/icons/root.png"));
+        rootButton = createButton("Go To Root Folder", IconLoader.getIcon("/icons/root.png"));
         rootButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,19 +73,16 @@ public class GenerateToolWindow implements ToolWindowFactory {
                 table.setModel(tableModel);
                 previousFolder.clear();
                 isClass = false;
-                if (previousFolder.isEmpty())
-                    previousButton.setEnabled(false);
+                if (previousFolder.isEmpty())previousButton.setEnabled(false);
                 else previousButton.setEnabled(true);
+
+                if(isClass)nextButton.setEnabled(false);
+                else nextButton.setEnabled(true);
             }
         });
-        rootButton.setToolTipText("Go To Root Folder");
+        sideBar.addButton(rootButton);
 
-        GridBagConstraints rootConstraints = new GridBagConstraints();
-        rootConstraints.gridx = 0;
-        rootConstraints.gridy = 0;
-        sideBarView.add(rootButton, rootConstraints);
-
-        previousButton = createButton(0, 30, IconLoader.getIcon("/icons/back.png"));
+        previousButton = createButton("Previous Folder", IconLoader.getIcon("/icons/back.png"));
         previousButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,52 +95,43 @@ public class GenerateToolWindow implements ToolWindowFactory {
                     table.setModel(tableModel);
                     isClass = false;
                 }
-                if (previousFolder.isEmpty())
-                    previousButton.setEnabled(false);
+                if (previousFolder.isEmpty()) previousButton.setEnabled(false);
                 else previousButton.setEnabled(true);
+
+                if(isClass)nextButton.setEnabled(false);
+                else nextButton.setEnabled(true);
             }
         });
-        previousButton.setToolTipText("Go Back A Folder");
+        previousButton.setEnabled(false);
+        sideBar.addButton(previousButton);
 
-        GridBagConstraints prevConstraints = new GridBagConstraints();
-        prevConstraints.gridx = 0;
-        prevConstraints.gridy = 31;
-        sideBarView.add(previousButton, prevConstraints);
-
-        nextButton = createButton(0, 60, IconLoader.getIcon("/icons/into.png"));
+        nextButton = createButton("Enter Selected Folder", IconLoader.getIcon("/icons/into.png"));
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!isClass){
 //                    previousFolder.push(currentFolder);
-                    if (previousFolder.isEmpty())
-                        previousButton.setEnabled(false);
+                    if (previousFolder.isEmpty())previousButton.setEnabled(false);
                     else previousButton.setEnabled(true);
+
+                    if(isClass)nextButton.setEnabled(false);
+                    else nextButton.setEnabled(true);
                     createModel(row);
                 }
             }
         });
-        nextButton.setToolTipText("Go into Folder");
+        sideBar.addButton(nextButton);
 
-        GridBagConstraints nextC = new GridBagConstraints();
-        nextC.gridx = 0;
-        nextC.gridy = 62;
-        sideBarView.add(nextButton, nextC);
-
-
-
-        extraButton = createButton(0, 90, IconLoader.getIcon("/icons/button_image.png"));
+        extraButton = createButton("extra", IconLoader.getIcon("/icons/button_image.png"));
         extraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("extra");
             }
         });
+        sideBar.addButton(extraButton);
 
-        GridBagConstraints extraConstraints = new GridBagConstraints();
-        extraConstraints.gridx = 0;
-        extraConstraints.gridy = 93;
-        sideBarView.add(extraButton, extraConstraints);
+        contentWindow.add(sideBar.getSideBarView(), BorderLayout.LINE_START);
     }
 
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
@@ -164,7 +148,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
         table = createTable();
         tableModel = rootFolder.getModel();
         table.setModel(tableModel);
-        table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
         table.addMouseListener(new MouseListener() {
@@ -211,10 +194,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
             }
         });
 
-        GridBagConstraints tableC = new GridBagConstraints();
-        tableC.gridx = 0;
-        tableC.gridy = 0;
-
         contentWindow.add(new JScrollPane(table));
         contentWindow.add(table.getTableHeader(), BorderLayout.EAST);
 
@@ -236,9 +215,11 @@ public class GenerateToolWindow implements ToolWindowFactory {
             currentFolder = currentFolder.getFolders().get(nextFolderIndex);
             table.setModel(tableModel);
         }
-        if (previousFolder.isEmpty())
-            previousButton.setEnabled(false);
+        if (previousFolder.isEmpty())previousButton.setEnabled(false);
         else previousButton.setEnabled(true);
+
+        if(isClass)nextButton.setEnabled(false);
+        else nextButton.setEnabled(true);
     }
 
     private JBTable createTable() {
@@ -247,7 +228,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
                 row = rows;
                 return false;
             }
-
             public Component prepareRenderer(TableCellRenderer cellRenderer, int rows, int columns) {
                 Component c = super.prepareRenderer(cellRenderer, rows, columns);
                 if (!table.getValueAt(rows, 1).equals(0)) {

@@ -1,8 +1,8 @@
 package com.ANZR.Ergo;
 
 public class AntiPattern {
-    String name;
-    double percent;
+    private String name;
+    private double percent;
 
     public String getName() {
         return name;
