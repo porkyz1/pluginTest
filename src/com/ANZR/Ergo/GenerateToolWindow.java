@@ -15,9 +15,9 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private JLabel errorLabel = new JLabel();
     private Folder rootFolder;
     private Folder currentFolder;
-    private Stack previousFolder = new Stack();
+    private Stack<Folder> previousFolder = new Stack<>();
 
-
+    
     public void populateToolWindow(ToolWindow toolWindow, Folder rootFolder) {
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
@@ -54,43 +54,31 @@ public class GenerateToolWindow implements ToolWindowFactory {
             currentFolder = currentFolder.getFolders().get(nextFileIndex);
             table.setTableModel(currentFolder);
         }
-        checkIfButtonEnable();
+        sideBar.checkIfButtonEnable();
     }
 
-    private void checkIfButtonEnable(){
-        if (previousFolder.isEmpty())sideBar.getPreviousButton().setEnabled(false);
-        else sideBar.getPreviousButton().setEnabled(true);
-
-        if(currentFolder.isClass())sideBar.getNextButton().setEnabled(false);
-        else sideBar.getNextButton().setEnabled(true);
+    public Table getTable() {
+        return table;
     }
 
-    //SIDE BAR FUNCTIONS
-    public void returnToRootFolder(){
-        table.setTableModel(rootFolder);
-        currentFolder = rootFolder;
-        previousFolder.clear();
-        checkIfButtonEnable();
+    public Folder getCurrentFolder() {
+        return currentFolder;
     }
 
-    public void previousFolder(){
-        if (!previousFolder.empty()){
-            sideBar.getPreviousButton().setEnabled(true);
-            currentFolder = (Folder) previousFolder.pop();
-            table.setTableModel(currentFolder);
-        }
-        checkIfButtonEnable();
+    public Stack<Folder> getPreviousFolder() {
+        return previousFolder;
     }
 
-    public void nextFolder(){
-        if (!currentFolder.isClass())
-            createModel(table.getRow());
-        checkIfButtonEnable();
+
+    //Getters and Setters
+
+    public Folder getRootFolder() {
+        return rootFolder;
     }
 
-//    public void extraButtonPressed(){
-//        System.out.println("EXTRA");
-//    }
+    public void setCurrentFolder(Folder currentFolder) {
+        this.currentFolder = currentFolder;
+    }
 
 
 }

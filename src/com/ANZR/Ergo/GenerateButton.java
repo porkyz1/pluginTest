@@ -14,30 +14,27 @@ public class GenerateButton extends AnAction {
         Project project = e.getData(LangDataKeys.PROJECT);
         ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Ergo");
         VirtualFile[] files = ProjectRootManager.getInstance(project).getContentSourceRoots();
-        Folder moduleFolder = getModuleFolder(project.getName(), files);
-
-//        Printer.printProjectFiles(moduleFolder);
-
+        Folder rootFolder = getRootFolder(project.getName(), files);
         GenerateToolWindow tool = new GenerateToolWindow();
-        tool.populateToolWindow(toolWindow, moduleFolder);
+        tool.populateToolWindow(toolWindow, rootFolder);
     }
 
     @Override
     public void update(AnActionEvent e) {
     }
 
-    private Folder getModuleFolder(String folderName, VirtualFile[] sourceFolders){
+    private Folder getRootFolder(String folderName, VirtualFile[] sourceFolders){
         Folder buildFolder = new Folder(folderName);
 
         for (VirtualFile file : sourceFolders) {
 
-            if(file.getFileType().getName() == "JAVA"){
+            if(file.getFileType().getName().equals("JAVA")){
                 buildFolder.addFolder(new Folder(file.getName(), true));
             }else if (file.isDirectory()){
-                Folder childFolder = getModuleFolder(file.getName(), file.getChildren());
+                Folder childFolder = getRootFolder(file.getName(), file.getChildren());
                 buildFolder.addFolder(childFolder);
             }else{
-                System.out.println("ERROR: We got something that was not a Java file or folder...");
+                ///File was not a directory or Java file.
             }
         }
 

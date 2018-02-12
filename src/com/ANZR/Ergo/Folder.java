@@ -1,6 +1,5 @@
 package com.ANZR.Ergo;
 
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class Folder {
@@ -9,11 +8,11 @@ public class Folder {
     private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
     private boolean isClass = false;
 
-    public Folder(String name) {
+    Folder(String name) {
         this.name = name;
     }
 
-    public Folder(String name, boolean isClass) {
+    Folder(String name, boolean isClass) {
         this.name = name;
         this.isClass = isClass;
         addAntiPattern(new AntiPattern("god", .5));
@@ -39,14 +38,13 @@ public class Folder {
         return antiPatterns;
     }
 
-
     public boolean isClass() {
         return isClass;
     }
 
     public int findFileIndex(String name){
         for (int i = 0; i < folders.size(); i++) {
-            if(folders.get(i).getName() == name)
+            if(folders.get(i).getName().equals(name))
                 return i;
         }
         return -1;

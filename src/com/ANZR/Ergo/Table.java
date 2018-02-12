@@ -5,8 +5,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -94,15 +92,12 @@ public class Table extends JBTable {
         if (e.getClickCount() == 2) {
             wasDoubleClick = true;
         } else {
-            Integer timerinterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty(
+            Integer timerInterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty(
                     "awt.multiClickInterval");
-            Timer timer = new Timer(timerinterval, new ActionListener() {
-
-                public void actionPerformed(ActionEvent evt) {
-                    if (isRowSelected(row) && wasDoubleClick) {
-                        parent.createModel(row);
-                        wasDoubleClick = false;
-                    }
+            Timer timer = new Timer(timerInterval, evt -> {
+                if (isRowSelected(row) && wasDoubleClick) {
+                    parent.createModel(row);
+                    wasDoubleClick = false;
                 }
             });
             timer.setRepeats(false);
@@ -112,15 +107,15 @@ public class Table extends JBTable {
     }
 
     public Component prepareRenderer(TableCellRenderer cellRenderer, int rows, int columns) {
-        Component c = super.prepareRenderer(cellRenderer, rows, columns);
+        Component component = super.prepareRenderer(cellRenderer, rows, columns);
         if (!getValueAt(rows, 1).equals(0)) {
-            c.setBackground(Color.RED);
-            c.setForeground(Color.BLACK);
+            component.setBackground(Color.RED);
+            component.setForeground(Color.BLACK);
         } else {
-            c.setBackground(Color.DARK_GRAY);
-            c.setForeground(Color.LIGHT_GRAY);
+            component.setBackground(Color.DARK_GRAY);
+            component.setForeground(Color.LIGHT_GRAY);
         }
-        return c;
+        return component;
     }
 
     public int getRow() {

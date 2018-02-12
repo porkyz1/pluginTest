@@ -1,6 +1,6 @@
 package com.ANZR.Ergo;
 
-public class AntiPattern {
+class AntiPattern {
     private String name;
     private double percent;
 
@@ -12,7 +12,7 @@ public class AntiPattern {
         return percent;
     }
 
-    public AntiPattern(String name, double percent){
+    AntiPattern(String name, double percent){
         this.name = name;
         this.percent = percent;
     }

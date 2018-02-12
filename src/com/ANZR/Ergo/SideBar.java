@@ -1,13 +1,8 @@
 package com.ANZR.Ergo;
 
 import com.intellij.openapi.util.IconLoader;
-import javafx.geometry.Side;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class SideBar extends JPanel {
 
@@ -50,31 +45,28 @@ public class SideBar extends JPanel {
 
     }
 
+    public void checkIfButtonEnable(){
+        if (parent.getPreviousFolder().isEmpty())
+            previousButton.setEnabled(false);
+        else
+            previousButton.setEnabled(true);
+
+        if(parent.getCurrentFolder().isClass())
+            nextButton.setEnabled(false);
+        else
+            nextButton.setEnabled(true);
+    }
+
     private void addButtons() {
         rootButton = createButton("Go To Root Folder", IconLoader.getIcon("/icons/root.png"));
-        rootButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parent.returnToRootFolder();
-            }
-        });
+        rootButton.addActionListener(e -> returnToRootFolder());
 
         previousButton = createButton("Previous Folder", IconLoader.getIcon("/icons/back.png"));
-        previousButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parent.previousFolder();
-            }
-        });
+        previousButton.addActionListener(e -> previousFolder());
         previousButton.setEnabled(false);
 
         nextButton = createButton("Enter Selected Folder", IconLoader.getIcon("/icons/into.png"));
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                parent.nextFolder();
-            }
-        });
+        nextButton.addActionListener(e -> nextFolder());
 
         //fund use or remove
 //        extraButton = createButton("extra", IconLoader.getIcon("/icons/button_image.png"));
@@ -95,16 +87,26 @@ public class SideBar extends JPanel {
         return button;
     }
 
-    public JButton getRootButton() {
-        return rootButton;
+    private void returnToRootFolder(){
+        parent.getTable().setTableModel(parent.getRootFolder());
+        parent.setCurrentFolder(parent.getRootFolder());
+        parent.getPreviousFolder().clear();
+        checkIfButtonEnable();
     }
 
-    public JButton getPreviousButton() {
-        return previousButton;
+    private void previousFolder(){
+        if (!parent.getPreviousFolder().empty()){
+            previousButton.setEnabled(true);
+            parent.setCurrentFolder(parent.getPreviousFolder().pop());
+            parent.getTable().setTableModel(parent.getCurrentFolder());
+        }
+        checkIfButtonEnable();
     }
 
-    public JButton getNextButton() {
-        return nextButton;
+    private void nextFolder(){
+        if (!parent.getCurrentFolder().isClass())
+            parent.createModel(parent.getTable().getRow());
+        checkIfButtonEnable();
     }
 
 //    public JButton getExtraButton() {
