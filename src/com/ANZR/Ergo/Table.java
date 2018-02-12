@@ -9,20 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Table extends JBTable {
 
-    GenerateToolWindow parent;
-    private Timer timer;
+    private GenerateToolWindow parent;
     private boolean wasDoubleClick;
     private int row;
+    private static final String[] classTableHeader = {"Anti-Pattern", "Found"};
+    private static final String[] folderTableHeader = {"Element", "Anti-Patterns Found"};
 
 
-    public Table(GenerateToolWindow parent, DefaultTableModel model){
+    Table(GenerateToolWindow parent){
         super();
         this.parent = parent;
 
-        setModel(model);
         setFillsViewportHeight(true);
         setAutoCreateRowSorter(true);
         addMouseListener(new MouseListener() {
@@ -51,6 +52,38 @@ public class Table extends JBTable {
 
     }
 
+    public void setTableModel(Folder folder) {
+        if(folder.isClass())
+            setClassModel(folder);
+        else
+            setFolderModel(folder);
+    }
+
+
+    private void setFolderModel(Folder folder){
+        ArrayList<Folder >folders = folder.getFolders();
+        Object[][] temp = new Object[folders.size()][folderTableHeader.length];
+        for (int i = 0; i < folders.size(); i++) {
+            if(folders.get(i).getName() != null)
+                temp[i][0] = folders.get(i).getName();
+            else temp[i][0] = "null";
+            temp[i][1] = Folder.getAntiPatternNumber(folders);
+        }
+        setModel(new DefaultTableModel(temp, folderTableHeader));
+    }
+
+    private void setClassModel(Folder folder){
+        ArrayList<AntiPattern > antiPatterns = folder.getAntiPatterns();
+        Object[][] temp = new Object[antiPatterns.size()][classTableHeader.length];
+        for (int i = 0; i < antiPatterns.size(); i++) {
+            if(antiPatterns.get(i).getName() != null)
+                temp[i][0] = antiPatterns.get(i).getName();
+            else temp[i][0] = "null";
+            temp[i][1] = antiPatterns.get(i).getPercent();
+        }
+        setModel(new DefaultTableModel(temp, classTableHeader));
+    }
+
     @Override
     public boolean isCellEditable(int rows, int columns) {
         row = rows;
@@ -63,7 +96,7 @@ public class Table extends JBTable {
         } else {
             Integer timerinterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty(
                     "awt.multiClickInterval");
-            timer = new Timer(timerinterval.intValue(), new ActionListener() {
+            Timer timer = new Timer(timerinterval, new ActionListener() {
 
                 public void actionPerformed(ActionEvent evt) {
                     if (isRowSelected(row) && wasDoubleClick) {

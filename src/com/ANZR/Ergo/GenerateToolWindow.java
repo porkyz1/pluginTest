@@ -3,14 +3,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.*;
 import com.intellij.ui.content.*;
 import com.intellij.util.containers.Stack;
-
 import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.*;
 
 public class GenerateToolWindow implements ToolWindowFactory {
 
-    private DefaultTableModel tableModel = new DefaultTableModel();
     private ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
     private JPanel contentWindow = new JPanel(new BorderLayout());
     private SideBar sideBar = new SideBar(this);
@@ -24,14 +21,13 @@ public class GenerateToolWindow implements ToolWindowFactory {
     public void populateToolWindow(ToolWindow toolWindow, Folder rootFolder) {
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
-        this.tableModel = currentFolder.getModel();
 
         //Setup Side Bar
         contentWindow.add(sideBar, BorderLayout.LINE_START);
 
         //Setup Table
-        tableModel = rootFolder.getModel();
-        table = new Table(this, tableModel);
+        table = new Table(this);
+        table.setTableModel(currentFolder);
         contentWindow.add(new JScrollPane(table));
         contentWindow.add(table.getTableHeader(), BorderLayout.EAST);
 
@@ -52,18 +48,16 @@ public class GenerateToolWindow implements ToolWindowFactory {
     }
 
     public void createModel(int rows) {
-        int nextFileIndex = currentFolder.findFileIndex(
-                tableModel.getValueAt(rows, 0).toString());
+        int nextFileIndex = currentFolder.findFileIndex(table.getModel().getValueAt(rows, 0).toString());
         if (previousFolder.isEmpty() || !currentFolder.isClass()){
             previousFolder.push(currentFolder);
-            tableModel = currentFolder.getFolders().get(nextFileIndex).getModel();
             currentFolder = currentFolder.getFolders().get(nextFileIndex);
-            table.setModel(tableModel);
+            table.setTableModel(currentFolder);
         }
-        checkButtonEnable();
+        checkIfButtonEnable();
     }
 
-    void checkButtonEnable(){
+    private void checkIfButtonEnable(){
         if (previousFolder.isEmpty())sideBar.getPreviousButton().setEnabled(false);
         else sideBar.getPreviousButton().setEnabled(true);
 
@@ -73,40 +67,30 @@ public class GenerateToolWindow implements ToolWindowFactory {
 
     //SIDE BAR FUNCTIONS
     public void returnToRootFolder(){
-        tableModel = rootFolder.getModel();
+        table.setTableModel(rootFolder);
         currentFolder = rootFolder;
-        table.setModel(tableModel);
         previousFolder.clear();
-        checkButtonEnable();
+        checkIfButtonEnable();
     }
 
     public void previousFolder(){
         if (!previousFolder.empty()){
             sideBar.getPreviousButton().setEnabled(true);
             currentFolder = (Folder) previousFolder.pop();
-            tableModel = currentFolder.getModel();
-            table.setModel(tableModel);
+            table.setTableModel(currentFolder);
         }
-        checkButtonEnable();
+        checkIfButtonEnable();
     }
 
     public void nextFolder(){
         if (!currentFolder.isClass())
             createModel(table.getRow());
-        checkButtonEnable();
+        checkIfButtonEnable();
     }
 
-    public void extraButtonPressed(){
-        System.out.println("EXTRA");
-    }
+//    public void extraButtonPressed(){
+//        System.out.println("EXTRA");
+//    }
 
 
-    //Setters + Getters
-    public SideBar getSideBar() {
-        return sideBar;
-    }
-
-    public Stack getPreviousFolder() {
-        return previousFolder;
-    }
 }
