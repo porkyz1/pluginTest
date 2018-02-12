@@ -14,6 +14,9 @@ public class Table extends JBTable {
     private GenerateToolWindow parent;
     private boolean wasDoubleClick;
     private int row;
+
+
+
     private static final String[] classTableHeader = {"Anti-Pattern", "Found"};
     private static final String[] folderTableHeader = {"Element", "Anti-Patterns Found"};
 
@@ -120,5 +123,9 @@ public class Table extends JBTable {
 
     public int getRow() {
         return row;
+    }
+
+    public static String[] getClassTableHeader() {
+        return classTableHeader;
     }
 }

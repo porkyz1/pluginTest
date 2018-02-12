@@ -16,11 +16,19 @@ public class GenerateToolWindow implements ToolWindowFactory {
     private Folder rootFolder;
     private Folder currentFolder;
     private Stack<Folder> previousFolder = new Stack<>();
+    private Project project;
 
-    
-    public void populateToolWindow(ToolWindow toolWindow, Folder rootFolder) {
+
+    public Project getProject() {
+        return project;
+    }
+
+
+
+    public void populateToolWindow(ToolWindow toolWindow, Folder rootFolder, Project project) {
         this.rootFolder = rootFolder;
         this.currentFolder = rootFolder;
+        this.project = project;
 
         //Setup Side Bar
         contentWindow.add(sideBar, BorderLayout.LINE_START);
@@ -54,7 +62,7 @@ public class GenerateToolWindow implements ToolWindowFactory {
             currentFolder = currentFolder.getFolders().get(nextFileIndex);
             table.setTableModel(currentFolder);
         }
-        sideBar.checkIfButtonEnable();
+        sideBar.setIfButtonIsEnabled();
     }
 
     public Table getTable() {

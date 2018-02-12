@@ -16,7 +16,7 @@ public class GenerateButton extends AnAction {
         VirtualFile[] files = ProjectRootManager.getInstance(project).getContentSourceRoots();
         Folder rootFolder = getRootFolder(project.getName(), files);
         GenerateToolWindow tool = new GenerateToolWindow();
-        tool.populateToolWindow(toolWindow, rootFolder);
+        tool.populateToolWindow(toolWindow, rootFolder, project);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class GenerateButton extends AnAction {
         for (VirtualFile file : sourceFolders) {
 
             if(file.getFileType().getName().equals("JAVA")){
-                buildFolder.addFolder(new Folder(file.getName(), true));
+                buildFolder.addFolder(new Folder(file.getName(), true, file));
             }else if (file.isDirectory()){
                 Folder childFolder = getRootFolder(file.getName(), file.getChildren());
                 buildFolder.addFolder(childFolder);

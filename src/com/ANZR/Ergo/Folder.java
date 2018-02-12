@@ -1,5 +1,7 @@
 package com.ANZR.Ergo;
 
+import com.intellij.openapi.vfs.VirtualFile;
+
 import java.util.ArrayList;
 
 public class Folder {
@@ -7,14 +9,18 @@ public class Folder {
     private ArrayList<Folder> folders = new ArrayList<>();
     private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
     private boolean isClass = false;
+    private VirtualFile virtualFile = null;
+
 
     Folder(String name) {
+
         this.name = name;
     }
 
-    Folder(String name, boolean isClass) {
+    Folder(String name, boolean isClass, VirtualFile file) {
         this.name = name;
         this.isClass = isClass;
+        this.virtualFile = file;
         addAntiPattern(new AntiPattern("god", .5));
     }
 
@@ -50,8 +56,6 @@ public class Folder {
         return -1;
     }
 
-
-
     public static int getAntiPatternNumber(ArrayList<Folder> folder){
         int temp = 0;
         for (Folder f : folder) {
@@ -60,5 +64,8 @@ public class Folder {
         return temp;
     }
 
+    public VirtualFile getVirtualFile() {
+        return virtualFile;
+    }
 
 }
