@@ -48,18 +48,10 @@ public class Folder {
         return isClass;
     }
 
-    public int findFileIndex(String name){
-        for (int i = 0; i < folders.size(); i++) {
-            if(folders.get(i).getName().equals(name))
-                return i;
-        }
-        return -1;
-    }
-
-    public static int getAntiPatternNumber(ArrayList<Folder> folder){
+    public static int getAntiPatternCount(ArrayList<Folder> folder){
         int temp = 0;
         for (Folder f : folder) {
-            temp += (f.getAntiPatterns().size() + getAntiPatternNumber(f.getFolders()));
+            temp += (f.getAntiPatterns().size() + getAntiPatternCount(f.getFolders()));
         }
         return temp;
     }

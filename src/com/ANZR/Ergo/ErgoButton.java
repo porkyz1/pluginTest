@@ -7,7 +7,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 
-public class GenerateButton extends AnAction {
+public class ErgoButton extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -15,7 +15,8 @@ public class GenerateButton extends AnAction {
         ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Ergo");
         VirtualFile[] files = ProjectRootManager.getInstance(project).getContentSourceRoots();
         Folder rootFolder = getRootFolder(project.getName(), files);
-        GenerateToolWindow tool = new GenerateToolWindow();
+//        Printer.printProjectFiles(rootFolder);
+        ErgoToolWindow tool = new ErgoToolWindow();
         tool.populateToolWindow(toolWindow, rootFolder, project);
     }
 

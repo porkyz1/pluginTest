@@ -6,6 +6,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.stream.Collectors;
 
 public class SideBar extends JPanel {
@@ -14,20 +15,20 @@ public class SideBar extends JPanel {
     private JButton previousButton = new JButton();
     private JButton nextButton = new JButton();
     private JButton sourceButton = new JButton();
-    private GenerateToolWindow parent;
+    private ErgoToolWindow parent;
 
-    SideBar(GenerateToolWindow parent) {
+    SideBar(ErgoToolWindow parent) {
         super(new GridBagLayout());
         this.parent = parent;
 
-        addButtons();
+        setButtons();
 
-        int row = 0;
+        int gridBagRow = 0;
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.gridx = 0;
         for (int x = 0; x < 4; x++) {
-            constraints.gridy = row;
+            constraints.gridy = gridBagRow;
             switch (x){
                 case 0:
                     add(rootButton, constraints);
@@ -43,7 +44,7 @@ public class SideBar extends JPanel {
                     add(sourceButton, constraints);
                     break;
             }
-            row++;
+            gridBagRow++;
         }
 
     }
@@ -69,27 +70,32 @@ public class SideBar extends JPanel {
 
     }
 
-    private void addButtons() {
-        rootButton = createButton("Go To Root Folder", IconLoader.getIcon("/icons/root.png"));
-        rootButton.addActionListener(e -> returnToRootFolder());
+    private void setButtons() {
+        rootButton = createButton("Go To Root Folder",
+                IconLoader.getIcon("/icons/root.png"),
+                e -> returnToRootFolder());
 
-        previousButton = createButton("Previous Folder", IconLoader.getIcon("/icons/back.png"));
-        previousButton.addActionListener(e -> previousFolder());
+        previousButton = createButton("Previous Folder",
+                IconLoader.getIcon("/icons/back.png"),
+                e -> previousFolder());
         previousButton.setEnabled(false);
 
-        nextButton = createButton("Enter Selected Folder", IconLoader.getIcon("/icons/into.png"));
-        nextButton.addActionListener(e -> nextFolder());
+        nextButton = createButton("Enter Selected Folder",
+                IconLoader.getIcon("/icons/into.png"),
+                e -> nextFolder());
 
-        sourceButton = createButton("Open Code In Project", IconLoader.getIcon("/icons/source.png"));
-        sourceButton.addActionListener(e -> sourceButtonPressed());
+        sourceButton = createButton("Open Code In Project",
+                IconLoader.getIcon("/icons/source.png"),
+                e -> sourceButtonPressed());
         sourceButton.setEnabled(false);
     }
 
-    private JButton createButton(String popupText, Icon icon) {
+    private JButton createButton(String popupText, Icon icon, ActionListener action) {
         JButton button = new JButton();
         button.setIcon(icon);
         button.setSize(30, 30);
         button.setToolTipText(popupText);
+        button.addActionListener(action);
         return button;
     }
 
@@ -102,7 +108,6 @@ public class SideBar extends JPanel {
 
     private void previousFolder(){
         if (!parent.getPreviousFolder().empty()){
-            previousButton.setEnabled(true);
             parent.setCurrentFolder(parent.getPreviousFolder().pop());
             parent.getTable().setTableModel(parent.getCurrentFolder());
         }
@@ -116,9 +121,6 @@ public class SideBar extends JPanel {
     }
 
     private void sourceButtonPressed(){
-        int index = parent.getTable().getRow();
-        String className = (String) parent.getTable().getModel().getValueAt(index, 0);
-
         String headerID = Table.getClassTableHeader()[0];
         String currentHeader = parent.getTable().getModel().getColumnName(0);
 
@@ -129,6 +131,8 @@ public class SideBar extends JPanel {
                 new OpenFileDescriptor(parent.getProject(), virtualFile).navigate(true);
             }
         }else{
+            int index = parent.getTable().getRow();
+            String className = (String) parent.getTable().getModel().getValueAt(index, 0);
             Folder file =  parent.getCurrentFolder().getFolders().stream().filter(x->x.getName().equals(className)).collect(Collectors.toList()).get(0);
 
             if (file.isClass()){
@@ -136,9 +140,6 @@ public class SideBar extends JPanel {
                 new OpenFileDescriptor(parent.getProject(), virtualFile).navigate(true);
             }
         }
-
         setIfButtonIsEnabled();
     }
-
-
 }

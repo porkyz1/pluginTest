@@ -6,7 +6,7 @@ import com.intellij.util.containers.Stack;
 import javax.swing.*;
 import java.awt.*;
 
-public class GenerateToolWindow implements ToolWindowFactory {
+public class ErgoToolWindow implements ToolWindowFactory {
 
     private ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
     private JPanel contentWindow = new JPanel(new BorderLayout());
@@ -32,7 +32,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
 
         //Setup Side Bar
         contentWindow.add(sideBar, BorderLayout.LINE_START);
-
         //Setup Table
         table = new Table(this);
         table.setTableModel(currentFolder);
@@ -56,10 +55,9 @@ public class GenerateToolWindow implements ToolWindowFactory {
     }
 
     public void createModel(int rows) {
-        int nextFileIndex = currentFolder.findFileIndex(table.getModel().getValueAt(rows, 0).toString());
         if (previousFolder.isEmpty() || !currentFolder.isClass()){
             previousFolder.push(currentFolder);
-            currentFolder = currentFolder.getFolders().get(nextFileIndex);
+            currentFolder = currentFolder.getFolders().get(rows);
             table.setTableModel(currentFolder);
         }
         sideBar.setIfButtonIsEnabled();
@@ -76,8 +74,6 @@ public class GenerateToolWindow implements ToolWindowFactory {
     public Stack<Folder> getPreviousFolder() {
         return previousFolder;
     }
-
-
     //Getters and Setters
 
     public Folder getRootFolder() {
@@ -87,6 +83,5 @@ public class GenerateToolWindow implements ToolWindowFactory {
     public void setCurrentFolder(Folder currentFolder) {
         this.currentFolder = currentFolder;
     }
-
 
 }

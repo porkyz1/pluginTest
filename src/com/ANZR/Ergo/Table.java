@@ -11,20 +11,17 @@ import java.util.ArrayList;
 
 public class Table extends JBTable {
 
-    private GenerateToolWindow parent;
+    private ErgoToolWindow parent;
     private boolean wasDoubleClick;
     private int row;
-
-
 
     private static final String[] classTableHeader = {"Anti-Pattern", "Found"};
     private static final String[] folderTableHeader = {"Element", "Anti-Patterns Found"};
 
 
-    Table(GenerateToolWindow parent){
+    Table(ErgoToolWindow parent){
         super();
         this.parent = parent;
-
         setFillsViewportHeight(true);
         setAutoCreateRowSorter(true);
         addMouseListener(new MouseListener() {
@@ -60,15 +57,14 @@ public class Table extends JBTable {
             setFolderModel(folder);
     }
 
-
     private void setFolderModel(Folder folder){
-        ArrayList<Folder >folders = folder.getFolders();
+        ArrayList<Folder> folders = folder.getFolders();
         Object[][] temp = new Object[folders.size()][folderTableHeader.length];
         for (int i = 0; i < folders.size(); i++) {
             if(folders.get(i).getName() != null)
                 temp[i][0] = folders.get(i).getName();
             else temp[i][0] = "null";
-            temp[i][1] = Folder.getAntiPatternNumber(folders);
+            temp[i][1] = folders.get(i).getAntiPatterns().size() + Folder.getAntiPatternCount(folders.get(i).getFolders());
         }
         setModel(new DefaultTableModel(temp, folderTableHeader));
     }
