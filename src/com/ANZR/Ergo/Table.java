@@ -1,6 +1,8 @@
 package com.ANZR.Ergo;
 
 import com.intellij.ui.table.JBTable;
+import com.intellij.util.ui.UIUtil;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -107,12 +109,22 @@ public class Table extends JBTable {
 
     public Component prepareRenderer(TableCellRenderer cellRenderer, int rows, int columns) {
         Component component = super.prepareRenderer(cellRenderer, rows, columns);
-        if (!getValueAt(rows, 1).equals(0)) {
-            component.setBackground(Color.RED);
-            component.setForeground(Color.BLACK);
-        } else {
-            component.setBackground(Color.DARK_GRAY);
-            component.setForeground(Color.LIGHT_GRAY);
+        if(UIUtil.isUnderDarcula()) {
+            if (!getValueAt(rows, 1).equals(0)) {
+                component.setBackground(new Color(140, 64, 64));
+                component.setForeground(Color.BLACK);
+            } else {
+                component.setBackground(Color.DARK_GRAY);
+                component.setForeground(Color.LIGHT_GRAY);
+            }
+        }else {
+            if (!getValueAt(rows, 1).equals(0)) {
+                component.setBackground(new Color(255, 220, 220));
+                component.setForeground(Color.BLACK);
+            } else {
+                component.setBackground(Color.WHITE);
+                component.setForeground(Color.BLACK);
+            }
         }
         return component;
     }

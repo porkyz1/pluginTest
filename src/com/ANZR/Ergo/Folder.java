@@ -8,18 +8,15 @@ public class Folder {
     private String name;
     private ArrayList<Folder> folders = new ArrayList<>();
     private ArrayList<AntiPattern> antiPatterns = new ArrayList<>();
-    private boolean isClass = false;
     private VirtualFile virtualFile = null;
 
 
     Folder(String name) {
-
         this.name = name;
     }
 
     Folder(String name, boolean isClass, VirtualFile file) {
         this.name = name;
-        this.isClass = isClass;
         this.virtualFile = file;
         addAntiPattern(new AntiPattern("god", .5));
     }
@@ -45,7 +42,7 @@ public class Folder {
     }
 
     public boolean isClass() {
-        return isClass;
+        return virtualFile != null;
     }
 
     public static int getAntiPatternCount(ArrayList<Folder> folder){
